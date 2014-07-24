@@ -4,14 +4,15 @@ using System.Collections;
 public class bear_movement : MonoBehaviour {
 
 	
-	public float speed_h;
-	public float speed_v;
+	private float speed_h;
+	private float speed_v;
 	public float accel_h = 5.0f;
 	public float accel_v = 5.0f;
 	public float maxSpeed_h = 5.0f;
 	public float maxSpeed_v = 5.0f;
 	public float slowdown_h = 5.0f;
-	public float slowdown_v = 5.0f;
+	public float gravity = 5.0f;
+	public float gravity_max = -1.0f;
 
 	private float button1;
 	private float button2;
@@ -26,8 +27,6 @@ public class bear_movement : MonoBehaviour {
 		GetControls();
 		ApplyForces();
 
-		Debug.Log("B1  " + button1);
-
 	}
 
 
@@ -41,7 +40,7 @@ public class bear_movement : MonoBehaviour {
 	}
 
 	void ApplyForces(){
-
+		//check button
 		if (button1 > 0.5) { 
 			if  (speed_h < maxSpeed_h){
 				speed_h += accel_h;
@@ -52,10 +51,6 @@ public class bear_movement : MonoBehaviour {
 			}		
 		}
 
-		if (speed_v >= maxSpeed_v) {
-			speed_v = 0;
-		}
-
 		//DECREASE
 		if ((speed_h > 0) && (speed_h < slowdown_h)){
 			speed_h = 0;
@@ -64,7 +59,12 @@ public class bear_movement : MonoBehaviour {
 			speed_h -= slowdown_h;
 		}
 
-		speed_v -= slowdown_v;
+
+			
+		if (speed_v > gravity_max){
+			speed_v -= gravity;
+		}
+
 
 
 		rigidbody2D.AddForce(new Vector2(speed_h,speed_v));
