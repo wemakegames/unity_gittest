@@ -37,7 +37,7 @@ public class level_generator : MonoBehaviour {
 			{
 				if(map_data[0][y * 96 + x] == 5){
 					
-					Instantiate(tiles_0, new Vector3((1f * -x)-96f*the_step,( 1f * -y) +11f, 0), Quaternion.identity);
+					Instantiate(tiles_0, new Vector3((1f * x)-96f*the_step,( 1f * -y) +11f, 0), Quaternion.identity);
 					
 				}else if(map_data[0][y * 96 + x] == 6){
 					
