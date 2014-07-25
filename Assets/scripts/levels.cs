@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Levels : MonoBehaviour {
+public class levels : MonoBehaviour {
 
 	public int[][] map_data_array = new int[12][];
 
