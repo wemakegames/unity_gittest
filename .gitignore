@@ -28,6 +28,11 @@ ExportedObj/
 ._*
 .Spotlight-V100
 .Trashes
+<<<<<<< HEAD
 Icon?
 ehthumbs.db
 Thumbs.db
+=======
+
+*.dwlt
+>>>>>>> origin/master
