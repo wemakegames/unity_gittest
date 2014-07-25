@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\camera_mvt.cs" />
+     <Compile Include="Assets\scripts\camera_splitscreen.cs" />
      <Compile Include="Assets\scripts\menu.cs" />
      <Compile Include="Assets\scripts\player_mvt.cs" />
      <Compile Include="Assets\scripts\player_phy.cs" />
