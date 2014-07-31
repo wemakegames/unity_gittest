@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class level_generator : MonoBehaviour {
-	
+	public static int chunks = 15;
 	public GameObject tiles_0;
 	public Sprite[] tiles;
 	public int level_step = 0;
@@ -40,9 +40,7 @@ public class level_generator : MonoBehaviour {
 	void GenerateLevel(int the_step){
 		int x, y, z;
 
-
-
-		for (z = 0; z < 15; z++) {
+		for (z = 0; z < chunks; z++) {
 			the_step = z;
 				for (y = 0; y < 12; y++) {
 						for (x = 0; x < 96; x++) {

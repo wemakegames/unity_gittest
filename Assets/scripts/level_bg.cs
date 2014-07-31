@@ -1,26 +1,38 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class level_bg : MonoBehaviour {
-	public GameObject bg_00;
-	public GameObject bg_01;
-	public GameObject bg_02;
+	public GameObject hills;
+
+	public GameObject stars;
+
+	public List<GameObject> stars_array = new List<GameObject>();
 
 	// Use this for initialization
 	void Start () {
+		GenerateParallax ();
+		GenerateStars ();
 
-
-		for (var i = 0; i<12; i++) {
-			var j = 8 * i;
-			Instantiate(bg_00, new Vector3(j,0,3), Quaternion.identity);
-			Instantiate(bg_01, new Vector3(j,0,6), Quaternion.identity);
-			Instantiate(bg_02, new Vector3(j,0,9), Quaternion.identity);
-
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void GenerateParallax () {
+		for (var i = -12; i< (12 * (level_generator.chunks+1)); i++) { //-12 and (level_generator.chunks+1) are there to create some buffer at the beginning and the end
+			var j = 8 * i;
+			Instantiate(hills, new Vector3(j,3,2), Quaternion.identity);
+		}
+	}
+
+	void GenerateStars () {
+
+		for (var i = -1; i< (12 * (level_generator.chunks / 3)); i++) {
+			var j = 32 * i;
+			Instantiate(stars, new Vector3(j,6,2), Quaternion.identity);
+		}
 	}
 }
