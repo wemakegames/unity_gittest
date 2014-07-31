@@ -32,12 +32,14 @@ public class level_generator : MonoBehaviour {
 	void GenerateLevel(int the_step){
 		int x, y, z;
 
-		for (z = 0; z < chunks; z++) 
-		
-		{	
-		
-			the_step = z;
+<<<<<<< HEAD
+		for (z = 0; z < chunks; z++) {
+=======
 
+
+		for (z = 0; z < 12; z++) {
+>>>>>>> 66d1804c799d78258d1ad8f4bec9e385ee060a1c
+			the_step = z;
 			for (y = 0; y < 12; y++) {
 				for (x = 0; x < 96; x++) {
 					tiles_0.GetComponent<BoxCollider2D> ().enabled = true;
@@ -66,7 +68,5 @@ public class level_generator : MonoBehaviour {
 		}
 	}
 }
-
-
 
 
