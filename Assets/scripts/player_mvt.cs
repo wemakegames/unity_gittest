@@ -11,8 +11,7 @@ public class player_mvt : MonoBehaviour {
 	public float maxSpeed_h = 5.0f;
 	public float maxSpeed_v = 5.0f;
 	public float slowdown_h = 5.0f;
-	public float gravity = 5.0f;
-	public float gravity_max = -1.0f;
+	public float slowdown_v = 5.0f;
 
 	private bool button1;
 	private bool button2;
@@ -43,9 +42,6 @@ public class player_mvt : MonoBehaviour {
 	void CalcForces(){
 		//check button
 		if (button1 && button2) { 
-			if  (speed_h < maxSpeed_h){
-				//speed_h += accel_h/4;
-			}
 			if (speed_v < maxSpeed_v) {
 				speed_v += accel_v;	
 			}
@@ -54,62 +50,21 @@ public class player_mvt : MonoBehaviour {
 			if  (speed_h < maxSpeed_h){
 				speed_h += accel_h;
 			}
-			if (speed_v < maxSpeed_v) {
-				speed_v += accel_v;	
-			}
 			button_next = 2;
-
 		}
 		else if (button2 && button_next == 2) { 
 			if  (speed_h < maxSpeed_h){
 				speed_h += accel_h;
-			}
-			if (speed_v < maxSpeed_v) {
-				speed_v += accel_v;	
 			}		
 			button_next = 1;
 		}
 
-		if (speed_v > gravity_max){
-			speed_v -= gravity;
+		if (speed_v > 0){
+			speed_v -= slowdown_v;
 		}
-
-
-
-
-
-
-
-		//DECREASE
-		if ((speed_h > 0) && (speed_h < slowdown_h)){
-			speed_h = 0;
-
-		}else if ((speed_h > 0) && (speed_h >= slowdown_h)){
-			speed_h -= slowdown_h;
+		if (speed_h > 0){
+			speed_h -= slowdown_h ;
 		}
-
-
-			
-
-
-
-
 	}
-
-
-	/*void Flip(){
-		if (Input.GetAxis("Horizontal")< 0) {
-			Vector3 theScale = transform.localScale;
-			theScale.x = -1;
-			transform.localScale = theScale;
-		} else {
-			Vector3 theScale = transform.localScale;
-			theScale.x = +1;
-			transform.localScale = theScale;
-		}
-	}*/
-
-
-
 }
 
