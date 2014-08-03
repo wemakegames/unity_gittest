@@ -19,16 +19,18 @@ public class camera_mvt : MonoBehaviour {
 
 	void FixedUpdate () {
 
+		/*
 		if (p1.transform.localPosition.x > p2.transform.localPosition.x) {
 			myTarget =	p1.transform;
 		}else
 		{
 			myTarget = p2.transform;
-		}
+		}*/
 
 		//temp variable to store local position
 		Vector3 temp = transform.localPosition;
 		temp.x = Mathf.Lerp(transform.localPosition.x, myTarget.transform.localPosition.x, Time.deltaTime * camSpeed);
+		temp.x -= 500;
 		transform.localPosition = temp;
 
 	}
