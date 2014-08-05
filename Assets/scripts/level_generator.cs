@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class level_generator : MonoBehaviour {
-	public static int chunks = 15;
+	//number of chunks in the entire game
+	public static int chunks = 12;
+
 	public GameObject tiles_0;
 	public Sprite[] tiles;
 	public int level_step = 0;
