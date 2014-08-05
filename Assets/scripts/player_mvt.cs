@@ -59,7 +59,7 @@ public class player_mvt : MonoBehaviour {
 		else if (button2 && button_next == 2) { 
 			if  (speed_h < maxSpeed_h){
 				speed_h += accel_h;
-				GetComponent<SpriteRenderer>().sprite = spr2;;
+				GetComponent<SpriteRenderer>().sprite = spr2;
 			}		
 			button_next = 1;
 		}
