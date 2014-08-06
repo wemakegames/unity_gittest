@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class scr_GameManager : MonoBehaviour {
+
 	public static GameObject gameManager;
+	private Component[] ps_array;
 
 	// Use this for initialization
 	void Start () {
@@ -15,8 +17,8 @@ public class scr_GameManager : MonoBehaviour {
 	}
 
 	public ParticleSystem GetSystem (GameObject obj,string systemName){
-		Component[] children = obj.GetComponentsInChildren<ParticleSystem> ();
-		foreach (ParticleSystem childParticleSystem in children) {
+		ps_array = obj.GetComponentsInChildren<ParticleSystem> ();
+		foreach (ParticleSystem childParticleSystem in ps_array) {
 			if (childParticleSystem.name == systemName) {
 				return childParticleSystem;
 			}
