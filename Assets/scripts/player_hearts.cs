@@ -5,7 +5,6 @@ public class player_hearts : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -16,9 +15,10 @@ public class player_hearts : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collision) {
 		if (collision.transform.tag == "heart") {
-						
-				Debug.Log (gameObject.name + "   Collided with someone");
+			ParticleSystem myPart = scr_GameManager.gameManager.GetComponent<scr_GameManager>().GetSystem(gameObject, "particles_stars");
+			myPart.Play();
 			Destroy(collision.gameObject);
 		}
 	}
+
 }
