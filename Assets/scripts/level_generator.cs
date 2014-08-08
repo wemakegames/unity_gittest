@@ -9,6 +9,8 @@ public class level_generator : MonoBehaviour {
 	public Sprite[] tiles;
 	public int level_step = 0;
 	int[][]map_data;
+
+	private int groundLayer;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,6 +20,8 @@ public class level_generator : MonoBehaviour {
 		the_levels.Start ();
 		map_data = the_levels.map_data_array;
 		GenerateLevel (0);
+
+		groundLayer = (1 << LayerMask.NameToLayer("Ground"));
 		
 	}
 	
@@ -78,6 +82,7 @@ public class level_generator : MonoBehaviour {
 						if (tiles_0.GetComponent<SpriteRenderer> ().sprite != tiles [5]){
 							tiles_0.GetComponent<BoxCollider2D> ().isTrigger = false;
 							tiles_0.GetComponent<BoxCollider2D> ().tag = "Untagged";
+							tiles_0.layer = groundLayer;
 						}
 
 						Instantiate (tiles_0, new Vector3 ((1f * x) + 96f * the_step, (1f * -y) + 11f, 0), Quaternion.identity);									
