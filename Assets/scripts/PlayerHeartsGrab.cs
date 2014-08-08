@@ -19,6 +19,8 @@ public class PlayerHeartsGrab : MonoBehaviour {
 			if (playerControl.playerLevel < 8) {
 					playerControl.playerLevel += 1;
 					soundManager.PlaySound("levelUp");
+					ParticleSystem myPart = GameManager.gameManager.GetComponent<GameManager>().GetSystem(gameObject, "particles_levelup");
+					myPart.Play();
 					heartCount = 0;
 			}
 		}
