@@ -17,7 +17,7 @@ public class camera_splitscreen : MonoBehaviour {
 
 			Vector3 temp_coord = transform.localPosition;
 			//TODO: make this dependant on screen width (like 95% of screen width or so).
-			temp_coord.x = myTarget.transform.localPosition.x + 23;
+			temp_coord.x = myTarget.transform.localPosition.x + 15;
 			transform.localPosition = temp_coord;
 		} else {
 			myTarget = null;
