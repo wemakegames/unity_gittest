@@ -50,6 +50,8 @@ public class PlayerControl : MonoBehaviour {
 		groundCheck = transform.Find ("groundCheck");
 		ceilingCheck = transform.Find ("ceilingCheck");
 		wallCheck = transform.Find ("wallCheck");
+		Physics2D.IgnoreLayerCollision(gameObject.layer,gameObject.layer, true);
+
 	}
 	
 	// Update is called once per frame
