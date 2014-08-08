@@ -23,13 +23,13 @@ public class PlayerDeath : MonoBehaviour {
 	void kill_player () {
 		this.renderer.enabled = false;
 
-		ParticleSystem myPart = scr_GameManager.gameManager.GetComponent<scr_GameManager>().GetSystem(gameObject, "particles_stars");
+		ParticleSystem myPart = GameManager.gameManager.GetComponent<GameManager>().GetSystem(gameObject, "particles_stars");
 		myPart.Play();
 		
-		myPart = scr_GameManager.gameManager.GetComponent<scr_GameManager>().GetSystem(gameObject, "particles_blood");
+		myPart = GameManager.gameManager.GetComponent<GameManager>().GetSystem(gameObject, "particles_blood");
 		myPart.Play();
 
-		myPart = scr_GameManager.gameManager.GetComponent<scr_GameManager>().GetSystem(gameObject, "particles_rainbow");
+		myPart = GameManager.gameManager.GetComponent<GameManager>().GetSystem(gameObject, "particles_rainbow");
 		myPart.Stop();
 		//DestroyObject (gameObject);
 		DestroyObject(mark);

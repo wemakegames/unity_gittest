@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private float speedH;
 	public float maxSpeedH = 6.0f;
+	public float initialMaxSpeedH;
 	public float accelH = 0.25f;
 	public float decelH = 0.05f;
 
@@ -25,12 +26,9 @@ public class PlayerControl : MonoBehaviour {
 	private Vector2 amountToMove;
 
 	private bool grounded = false;
-	private bool hitCeiling = false;
 	private bool hitWall = false;
 
 	private Transform groundCheck;
-	private Transform ceilingCheck;
-	private Transform wallCheck;
 
 	////////////
 	/// Controls
@@ -55,13 +53,18 @@ public class PlayerControl : MonoBehaviour {
 	private Vector3[] wallCheckDestination;
 	private float lineLenght = 1.1f;
 
+	////////////
+	/// LevelUp
+	////////////
+
+	public int playerLevel = 0;
+	private float[] MaxSpeedCap = {0,25,50,75,100,125,150,175,200};
+
 
 	// Use this for initialization
 
 	void Start () {
 		groundCheck = transform.Find ("groundCheck");
-		ceilingCheck = transform.Find ("ceilingCheck");
-		wallCheck = transform.Find ("wallCheck");
 		Physics2D.IgnoreLayerCollision(gameObject.layer,gameObject.layer, true);
 
 		playerHeartsGrab = GetComponent<PlayerHeartsGrab> ();
@@ -69,6 +72,7 @@ public class PlayerControl : MonoBehaviour {
 		wallCheckOrigin = new Vector3[3];
 		wallCheckDestination = new Vector3[3];
 
+		initialMaxSpeedH = maxSpeedH;   //set it up here to make sure the inspector value is respected
 	}
 	
 	// Update is called once per frame
@@ -112,8 +116,8 @@ public class PlayerControl : MonoBehaviour {
 	void CalcHForce(){
 
 		//check button
-		//hitWall = Physics2D.Linecast(transform.position,wallCheck.position,1 << LayerMask.NameToLayer("Ground"));
 
+		maxSpeedH = initialMaxSpeedH + (initialMaxSpeedH * (MaxSpeedCap[playerLevel]/100 ));
 
 		if (!hitWall) {
 			if (( button1 && !button2 && button_next == false ) || (!button1 && button2 && button_next == true)) {
@@ -144,7 +148,7 @@ public class PlayerControl : MonoBehaviour {
 	void CalcVForce(){
 
 		grounded = Physics2D.Linecast(transform.position,groundCheck.position,1 << LayerMask.NameToLayer("Ground"));
-		hitCeiling = Physics2D.Linecast(transform.position,ceilingCheck.position,1 << LayerMask.NameToLayer("Ground"));
+		//hitCeiling = Physics2D.Linecast(transform.position,ceilingCheck.position,1 << LayerMask.NameToLayer("Ground"));
 
 		//Gravity
 		if (!grounded) {
@@ -159,7 +163,7 @@ public class PlayerControl : MonoBehaviour {
 
 		//Goin up
 
-		if (!hitCeiling){
+		if ((transform.localPosition.y < 10.25f)) {
 			if (button1 && button2) { 
 				if  ( speedV < maxSpeedV ){
 					speedV += accelV;
@@ -171,6 +175,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 		else {
 			speedV = 0;
+
 		}
 
 		speedV -= decelV;
@@ -178,7 +183,7 @@ public class PlayerControl : MonoBehaviour {
 
 
 	void Move(){
-		amountToMove = new Vector2 ( speedH * (playerHeartsGrab.heartCount), speedV );
+		amountToMove = new Vector2 ( speedH, speedV );
 		transform.Translate( amountToMove * Time.deltaTime );
 	}
 
