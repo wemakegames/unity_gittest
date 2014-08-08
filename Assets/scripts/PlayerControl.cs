@@ -44,6 +44,18 @@ public class PlayerControl : MonoBehaviour {
 	public string button2_name;
 
 
+	private PlayerHeartsGrab playerHeartsGrab;
+
+
+	////////////
+	/// Collision
+	////////////
+
+	private Vector3[] wallCheckOrigin;
+	private Vector3[] wallCheckDestination;
+	private float lineLenght = 1.1f;
+
+
 	// Use this for initialization
 
 	void Start () {
@@ -52,11 +64,16 @@ public class PlayerControl : MonoBehaviour {
 		wallCheck = transform.Find ("wallCheck");
 		Physics2D.IgnoreLayerCollision(gameObject.layer,gameObject.layer, true);
 
+		playerHeartsGrab = GetComponent<PlayerHeartsGrab> ();
+
+		wallCheckOrigin = new Vector3[3];
+		wallCheckDestination = new Vector3[3];
+
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-
+		CheckCollisions ();
 		GetControls ();
 		CalcHForce ();
 		CalcVForce ();
@@ -65,14 +82,37 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 
+	void CheckCollisions(){
+		wallCheckOrigin[0] = new Vector3 (transform.position.x, transform.position.y + 0.8f, transform.position.z);
+		wallCheckOrigin[1] = transform.position;
+		wallCheckOrigin[2] = new Vector3 (transform.position.x, transform.position.y - 0.8f, transform.position.z);
+		
+		
+		wallCheckDestination[0] = new Vector3 (transform.position.x + lineLenght, transform.position.y + 0.8f, transform.position.z);
+		wallCheckDestination[1] = new Vector3 (transform.position.x + lineLenght, transform.position.y, transform.position.z);
+		wallCheckDestination[2] = new Vector3 (transform.position.x + lineLenght, transform.position.y - 0.8f, transform.position.z);
+		
+
+		for (int i = 0; i < 3; i++) {
+
+
+			Debug.DrawLine (wallCheckOrigin[i], wallCheckDestination[i], Color.green);
+			hitWall = Physics2D.Linecast (wallCheckOrigin[i], wallCheckDestination[i], 1 << LayerMask.NameToLayer ("Ground"));
+			if (hitWall){
+				break;
+			}
+		}
+	}
+
 	void GetControls(){
 		button1 = Input.GetButton(button1_name);
 		button2 = Input.GetButton(button2_name);
 	}
 
 	void CalcHForce(){
+
 		//check button
-		hitWall = Physics2D.Linecast(transform.position,wallCheck.position,1 << LayerMask.NameToLayer("Ground"));
+		//hitWall = Physics2D.Linecast(transform.position,wallCheck.position,1 << LayerMask.NameToLayer("Ground"));
 
 
 		if (!hitWall) {
@@ -130,7 +170,7 @@ public class PlayerControl : MonoBehaviour {
 			}
 		}
 		else {
-			speedH = 0;
+			speedV = 0;
 		}
 
 		speedV -= decelV;
@@ -138,7 +178,7 @@ public class PlayerControl : MonoBehaviour {
 
 
 	void Move(){
-		amountToMove = new Vector2 ( speedH, speedV );
+		amountToMove = new Vector2 ( speedH * (playerHeartsGrab.heartCount), speedV );
 		transform.Translate( amountToMove * Time.deltaTime );
 	}
 

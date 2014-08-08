@@ -31,8 +31,9 @@ public class PlayerDeath : MonoBehaviour {
 
 		myPart = scr_GameManager.gameManager.GetComponent<scr_GameManager>().GetSystem(gameObject, "particles_rainbow");
 		myPart.Stop();
-	
+		//DestroyObject (gameObject);
 		DestroyObject(mark);
+		gameObject.collider2D.enabled = false;
 	}
 }
 
