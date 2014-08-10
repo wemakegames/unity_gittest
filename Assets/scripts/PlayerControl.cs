@@ -11,13 +11,16 @@ public class PlayerControl : MonoBehaviour {
 	/// Movement
 	////////////
 
-	private float speedH;
+	public float speedH;
+	public float speedV;
+
+
 	public float maxSpeedH = 6.0f;
 	public float initialMaxSpeedH;
 	public float accelH = 0.25f;
 	public float decelH = 0.05f;
 
-	private float speedV;
+
 	public float maxSpeedV = 3.5f;
 	public float accelV = 0.5f;
 	public float decelV = 0.25f;
@@ -51,7 +54,7 @@ public class PlayerControl : MonoBehaviour {
 
 	private Vector3[] wallCheckOrigin;
 	private Vector3[] wallCheckDestination;
-	private float lineLenght = 1.1f;
+	private float lineLenght = 1.0f;
 
 	////////////
 	/// LevelUp
@@ -59,6 +62,13 @@ public class PlayerControl : MonoBehaviour {
 
 	public int playerLevel = 0;
 	private float[] MaxSpeedCap = {0,25,50,75,100,125,150,175,200};
+
+	////////////
+	/// SpeedBar
+	////////////
+
+
+
 
 
 	// Use this for initialization
@@ -81,8 +91,8 @@ public class PlayerControl : MonoBehaviour {
 		GetControls ();
 		CalcHForce ();
 		CalcVForce ();
-
 		Move();
+
 	}
 
 

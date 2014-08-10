@@ -25,7 +25,7 @@ public class menu_manager : MonoBehaviour {
 		button4 = Input.GetButton("Fire4");
 		
 		if (button1 || button2 || button3 || button4) {
-			Application.LoadLevel("game_sam");
+			Application.LoadLevel("game");
 		}
 	}
 }

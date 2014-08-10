@@ -34,7 +34,7 @@ public class SoundManager : MonoBehaviour {
 			clip = death;
 			break;
 		}
-		Debug.Log (clip);
+		Debug.Log ("played sound : " + clip);
 		AudioSource.PlayClipAtPoint (clip, transform.position);
 
 	}
