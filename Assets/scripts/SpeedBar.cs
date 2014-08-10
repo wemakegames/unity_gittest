@@ -19,6 +19,12 @@ public class SpeedBar: MonoBehaviour {
 	public Texture2D gaugeBgRight;
 
 
+	void Awake () {
+		
+		//Player values
+		playerControl = player.GetComponent<PlayerControl> ();
+	}
+
 	void OnGUI (){
 
 
@@ -27,7 +33,12 @@ public class SpeedBar: MonoBehaviour {
 
 		float convertedSpeed = ((speed/maxSpeed) * gaugeWidth);
 
-		GUI.BeginGroup (new Rect (16,16, gaugeWidth ,gaugeHeight));
+		if (player.name == "p1") {
+				GUI.BeginGroup (new Rect (16, 16, gaugeWidth, gaugeHeight));
+		} else {
+			GUI.BeginGroup (new Rect (16, 240, gaugeWidth, gaugeHeight));
+		}
+
 
 		GUI.DrawTexture (new Rect(0,0, convertedSpeed,gaugeHeight),gaugeFg);	
 
@@ -48,11 +59,7 @@ public class SpeedBar: MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Awake () {
 
-		//Player values
-		playerControl = player.GetComponent<PlayerControl> ();
-	}
 	
 	// Update is called once per frame
 	void Update () {
