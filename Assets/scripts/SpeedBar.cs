@@ -18,6 +18,7 @@ public class SpeedBar: MonoBehaviour {
 	public Texture2D gaugeBgLeft;
 	public Texture2D gaugeBgRight;
 
+	public Color gaugeColor;
 
 	void Awake () {
 		
@@ -27,32 +28,35 @@ public class SpeedBar: MonoBehaviour {
 
 	void OnGUI (){
 
+		//UI is divided intro two GuiGroups.
+		// 1 --> the moving gauge, made of one asset
+		// 2 --> the gauge border, size is dynamic depending on assets. It's on top of the moving gauge
+
 
 		gaugeWidth = (32 * playerControl.playerLevel) + gaugeBg.width + gaugeBgLeft.width + gaugeBgRight.width;
 		gaugeHeight = gaugeBg.height;
 
 		float convertedSpeed = ((speed/maxSpeed) * gaugeWidth);
 
-		if (player.name == "p1") {
+
+		//first group
+		if (player.name == "p1") {      //some hardcoded stuff to position the UI for each player, very dirty! 
 				GUI.BeginGroup (new Rect (16, 16, gaugeWidth, gaugeHeight));
 		} else {
 			GUI.BeginGroup (new Rect (16, 240, gaugeWidth, gaugeHeight));
 		}
 
+			GUI.color = gaugeColor;   // set custom gauge color
+			GUI.DrawTexture (new Rect(0,0, convertedSpeed,gaugeHeight),gaugeFg);	
+			GUI.color = Color.white; // restore asset color
 
-		GUI.DrawTexture (new Rect(0,0, convertedSpeed,gaugeHeight),gaugeFg);	
-
+		//second group
 		GUI.BeginGroup (new Rect ( 0,0, gaugeWidth, 32));
 			
-		GUI.DrawTexture (new Rect(0,0,gaugeBgLeft.width,gaugeHeight),gaugeBgLeft);	
+			GUI.DrawTexture (new Rect(0,0,gaugeBgLeft.width,gaugeHeight),gaugeBgLeft);	
+			GUI.DrawTexture (new Rect(gaugeBgLeft.width,0, gaugeWidth-gaugeBgLeft.width-gaugeBgRight.width,gaugeHeight),gaugeBg, ScaleMode.StretchToFill);
+			GUI.DrawTexture (new Rect(gaugeWidth - gaugeBgLeft.width,0,gaugeBgRight.width,gaugeHeight),gaugeBgRight);	
 
-		GUI.DrawTexture (new Rect(gaugeBgLeft.width,0, gaugeWidth-gaugeBgLeft.width-gaugeBgRight.width,gaugeHeight),gaugeBg, ScaleMode.StretchToFill);
-
-
-		GUI.DrawTexture (new Rect(gaugeWidth - gaugeBgLeft.width,0,gaugeBgRight.width,gaugeHeight),gaugeBgRight);	
-
-
-	
 		GUI.EndGroup();
         
 		GUI.EndGroup();
