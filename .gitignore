@@ -36,3 +36,4 @@ Library/*.dwlt
 Library/*.dwlt
 *.sln
 builds/
+backup/game_scene.unitypackage
