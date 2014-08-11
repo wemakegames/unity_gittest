@@ -11,6 +11,8 @@ public class PlayerControl : MonoBehaviour {
 	/// Movement
 	////////////
 
+	public bool active = false;
+
 	public float speedH;
 	public float speedV;
 
@@ -91,7 +93,8 @@ public class PlayerControl : MonoBehaviour {
 		GetControls ();
 		CalcHForce ();
 		CalcVForce ();
-		Move();
+		Move ();
+
 
 	}
 
@@ -119,8 +122,13 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void GetControls(){
-		button1 = Input.GetButton(button1_name);
-		button2 = Input.GetButton(button2_name);
+		if (active) {
+			button1 = Input.GetButton (button1_name);
+			button2 = Input.GetButton (button2_name);
+		} else  { 
+			button1 = false;
+			button2 = false;
+		}
 	}
 
 	void CalcHForce(){
