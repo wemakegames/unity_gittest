@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class StartUpSequence : MonoBehaviour {
 
 	private GameManager gameManager;
 	private string startTimer;
-
+	private string startTimer2;
 	public Font font;
+
+	private float startTimerInterval = .1f;
 
 	// Use this for initialization
 	void Start () {
@@ -14,32 +16,11 @@ public class StartUpSequence : MonoBehaviour {
 		StartCoroutine(StartSequence());   //launches startup coroutine	
 	}
 
-	IEnumerator StartSequence () { 
-		//startup coroutine runs every frame until it's done (no need to go thorugh update() )
-		startTimer = "GET READY";
-		yield return StartCoroutine(gameManager.Wait (1.0f));
-		startTimer = "3";
-		yield return StartCoroutine(gameManager.Wait (1.0f));
-		startTimer = "2";
-		yield return StartCoroutine(gameManager.Wait (1.0f));
-		startTimer = "1";
-		yield return StartCoroutine(gameManager.Wait (1.0f));
-		startTimer = "GO";
-		yield return StartCoroutine(gameManager.Wait (1.0f));
-
-		foreach ( GameObject player in gameManager.players) {
-			Debug.Log("START!!!");
-			player.GetComponent<PlayerControl>().active = true;			
-		}	
-
-		this.enabled = false;
-	}
-
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	void OnGUI () {
 		GUIStyle startUpLabel = new GUIStyle (GUI.skin.label);
 		startUpLabel.font = font;
@@ -47,6 +28,62 @@ public class StartUpSequence : MonoBehaviour {
 		startUpLabel.alignment = TextAnchor.MiddleCenter;
 		startUpLabel.normal.textColor = Color.yellow;
 		GUI.Label(new Rect(0, 0, Screen.width, Screen.height/2), startTimer, startUpLabel);
-		GUI.Label(new Rect(0, Screen.height/2, Screen.width, Screen.height/2), startTimer, startUpLabel);
+		GUI.Label(new Rect(0, Screen.height/2, Screen.width, Screen.height/2), startTimer2, startUpLabel);
 	}
+
+	IEnumerator StartSequence () { 
+		//startup coroutine runs every frame until it's done (no need to go thorugh update() )
+		startTimer = "GET READY";
+		startTimer2 = startTimer;
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
+		startTimer = "3";
+		startTimer2 = startTimer;
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
+		startTimer = "2";
+		startTimer2 = startTimer;
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
+		startTimer = "1";
+		startTimer2 = startTimer;
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
+
+		startTimer = "Mash W and X !";
+		startTimer2 = "Mash Left and Right !";
+
+		//activate players
+		foreach ( GameObject player in gameManager.players) {
+			player.GetComponent<PlayerControl>().active = true;			
+		}
+
+
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "";
+		startTimer2 = "";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "Mash W and X !";
+		startTimer2 = "Mash Left and Right !";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "";
+		startTimer2 = "";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "Mash W and X !";
+		startTimer2 = "Mash Left and Right !";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "";
+		startTimer2 = "";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "Mash W and X !";
+		startTimer2 = "Mash Left and Right !";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "";
+		startTimer2 = "";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+		startTimer = "Mash W and X !";
+		startTimer2 = "Mash Left and Right !";
+		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
+
+		//deactivate component so that the loop is not performend anymore
+		this.enabled = false;
+	}
+
+
 }
