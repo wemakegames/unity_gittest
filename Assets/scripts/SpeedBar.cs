@@ -41,9 +41,9 @@ public class SpeedBar: MonoBehaviour {
 
 		//first group
 		if (player.name == "p1") {      //some hardcoded stuff to position the UI for each player, very dirty! 
-				GUI.BeginGroup (new Rect (16, 16, gaugeWidth, gaugeHeight));
+			GUI.BeginGroup (new Rect (16, 16, gaugeWidth, gaugeHeight));
 		} else {
-			GUI.BeginGroup (new Rect (16, 240, gaugeWidth, gaugeHeight));
+			GUI.BeginGroup (new Rect (16, Screen.height / 2 + 16, gaugeWidth, gaugeHeight));
 		}
 
 			GUI.color = gaugeColor;   // set custom gauge color
