@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
@@ -10,9 +10,8 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameManager = gameObject;
 		players = GameObject.FindGameObjectsWithTag ("Player");
-
+		gameManager = gameObject;
 	}
 
 
