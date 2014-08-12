@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		Cheat ();
 	}
 
 	public ParticleSystem GetSystem (GameObject obj,string systemName){
@@ -38,5 +38,13 @@ public class GameManager : MonoBehaviour {
 		return null;
 	}
 
+	public void Cheat() {
+
+		if ((players [0].transform.position.x - players [1].transform.position.x) > 10) {
+			players[1].GetComponent<PlayerControl>().speedH += players[1].GetComponent<PlayerControl>().maxSpeedH;
+		} else if ((players [1].transform.position.x - players [0].transform.position.x) > 10 ) {
+			players[0].GetComponent<PlayerControl>().speedH += players[0].GetComponent<PlayerControl>().maxSpeedH;
+		}
+	}
 
 }

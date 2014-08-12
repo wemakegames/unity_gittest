@@ -11,7 +11,7 @@ public class StartUpSequence : MonoBehaviour {
 
 	public AudioClip audioClip;
 
-	private float startTimerInterval = 1.0f;
+	private float startTimerInterval = .1f;
 
 	// Use this for initialization
 	void Start () {
@@ -59,7 +59,7 @@ public class StartUpSequence : MonoBehaviour {
 		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		//activate players
 		foreach ( GameObject player in gameManager.players) {
-			player.GetComponent<PlayerControl>().active = true;			
+			player.GetComponent<PlayerControl>().on = true;			
 		}
 
 

@@ -42,7 +42,7 @@ public class PlayerDeath : MonoBehaviour {
 			myPart.Stop();
 
 			player.collider2D.enabled = false;
-			player.GetComponent<PlayerControl>().active = false;
+			player.GetComponent<PlayerControl>().on = false;
 		}
 		//DestroyObject (gameObject);
 		DestroyObject(mark);

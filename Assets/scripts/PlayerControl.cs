@@ -11,7 +11,7 @@ public class PlayerControl : MonoBehaviour {
 	/// Movement
 	////////////
 
-	public bool active = false;
+	public bool on = false;
 
 	public float speedH;
 	public float speedV;
@@ -47,8 +47,6 @@ public class PlayerControl : MonoBehaviour {
 	public string button2_name;
 
 
-	private PlayerHeartsGrab playerHeartsGrab;
-
 
 	////////////
 	/// Collision
@@ -78,8 +76,6 @@ public class PlayerControl : MonoBehaviour {
 	void Start () {
 		groundCheck = transform.Find ("groundCheck");
 		Physics2D.IgnoreLayerCollision(gameObject.layer,gameObject.layer, true);
-
-		playerHeartsGrab = GetComponent<PlayerHeartsGrab> ();
 
 		wallCheckOrigin = new Vector3[3];
 		wallCheckDestination = new Vector3[3];
@@ -122,7 +118,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void GetControls(){
-		if (active) {
+		if (on) {
 			button1 = Input.GetButton (button1_name);
 			button2 = Input.GetButton (button2_name);
 		} else  { 
@@ -144,7 +140,8 @@ public class PlayerControl : MonoBehaviour {
 				if  ( speedH < maxSpeedH ){
 					speedH += accelH;
 				} else {
-					speedH = maxSpeedH;
+					//speed is not limited horizontally but once it
+					//is over MaxSpeed player can't accellerate
 				}
 				button_next = !button_next;
 				ChangeSprite();
@@ -154,7 +151,9 @@ public class PlayerControl : MonoBehaviour {
 			if (speedH > 0) {
 				speedH -= decelH;
 			} else {
-				speedH = 0;
+				//speed is not limited horizontally but once it
+				//is over MaxSpeed player can't accellerate
+
 			}
 
 		} else {

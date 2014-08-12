@@ -4,7 +4,6 @@ using System.Collections;
 public class EndSequence : MonoBehaviour {
 
 	private string endText;
-	private float endTimer = 10f;
 	public Font font;
 	private bool displayMenu = false;
 	private string winnerName;
