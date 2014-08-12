@@ -4,11 +4,14 @@ using System.Collections;
 public class StartUpSequence : MonoBehaviour {
 
 	private GameManager gameManager;
+
 	private string startTimer;
 	private string startTimer2;
 	public Font font;
 
-	private float startTimerInterval = .1f;
+	public AudioClip audioClip;
+
+	private float startTimerInterval = 1.0f;
 
 	// Use this for initialization
 	void Start () {
@@ -33,22 +36,27 @@ public class StartUpSequence : MonoBehaviour {
 
 	IEnumerator StartSequence () { 
 		//startup coroutine runs every frame until it's done (no need to go thorugh update() )
+
 		startTimer = "GET READY";
 		startTimer2 = startTimer;
+
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
 		startTimer = "3";
 		startTimer2 = startTimer;
+		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
 		startTimer = "2";
 		startTimer2 = startTimer;
+		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
 		startTimer = "1";
 		startTimer2 = startTimer;
+		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
 
 		startTimer = "Mash W and X !";
 		startTimer2 = "Mash Left and Right !";
-
+		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		//activate players
 		foreach ( GameObject player in gameManager.players) {
 			player.GetComponent<PlayerControl>().active = true;			

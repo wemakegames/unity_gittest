@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SpeedBar: MonoBehaviour {
 
 	public float speed = 10.0f;
 	public float maxSpeed = 100.0f;
-	private float initWidth;
+	//private float initWidth;
 	private float gaugeWidth;
 	private float gaugeHeight;
 	private float speedPercentage;
@@ -40,7 +40,7 @@ public class SpeedBar: MonoBehaviour {
 
 
 		//first group
-		if (player.name == "p1") {      //some hardcoded stuff to position the UI for each player, very dirty! 
+		if (player.name == "Player1") {      //some hardcoded stuff to position the UI for each player, very dirty! 
 			GUI.BeginGroup (new Rect (16, 16, gaugeWidth, gaugeHeight));
 		} else {
 			GUI.BeginGroup (new Rect (16, Screen.height / 2 + 16, gaugeWidth, gaugeHeight));
@@ -81,7 +81,7 @@ public class SpeedBar: MonoBehaviour {
 			speedPercentage = 100;
 		}
 
-		gaugeWidth = speedPercentage * initWidth;
+		//gaugeWidth = speedPercentage * initWidth;
 
 	}
 }
