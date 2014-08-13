@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 	public static GameObject gameManager;
 	private Component[] ps_array;
 	public GameObject[] players;
+	private bool checkCheat = true;
 
 
 	// Use this for initialization
@@ -25,7 +26,9 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Cheat ();
+		if (checkCheat == true) {
+				StartCoroutine (Cheat ());
+		}
 	}
 
 	public ParticleSystem GetSystem (GameObject obj,string systemName){
@@ -38,13 +41,19 @@ public class GameManager : MonoBehaviour {
 		return null;
 	}
 
-	public void Cheat() {
+	IEnumerator Cheat() {
 
-		if ((players [0].transform.position.x - players [1].transform.position.x) > 10) {
+		checkCheat = false;
+
+		if ((players [0].transform.position.x - players [1].transform.position.x) > 50) {
 			players[1].GetComponent<PlayerControl>().speedH += players[1].GetComponent<PlayerControl>().maxSpeedH;
-		} else if ((players [1].transform.position.x - players [0].transform.position.x) > 10 ) {
+		} else if ((players [1].transform.position.x - players [0].transform.position.x) > 50 ) {
 			players[0].GetComponent<PlayerControl>().speedH += players[0].GetComponent<PlayerControl>().maxSpeedH;
 		}
+
+		yield return StartCoroutine(Wait (5.0f));
+
+		checkCheat = true;
 	}
 
 }

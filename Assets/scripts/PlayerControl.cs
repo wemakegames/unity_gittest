@@ -46,8 +46,6 @@ public class PlayerControl : MonoBehaviour {
 	public string button1_name;
 	public string button2_name;
 
-
-
 	////////////
 	/// Collision
 	////////////
