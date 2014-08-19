@@ -18,12 +18,18 @@ public class SpeedBar: MonoBehaviour {
 	public Texture2D gaugeBgLeft;
 	public Texture2D gaugeBgRight;
 
+	public Texture2D heartEmpty;
+	public Texture2D heartFull;
+
 	public Color gaugeColor;
+
+	private int playerHeartCount;
 
 	void Awake () {
 		
 		//Player values
 		playerControl = player.GetComponent<PlayerControl> ();
+
 	}
 
 	void OnGUI (){
@@ -31,8 +37,7 @@ public class SpeedBar: MonoBehaviour {
 		//UI is divided intro two GuiGroups.
 		// 1 --> the moving gauge, made of one asset
 		// 2 --> the gauge border, size is dynamic depending on assets. It's on top of the moving gauge
-
-
+	
 		gaugeWidth = (32 * playerControl.playerLevel) + gaugeBg.width + gaugeBgLeft.width + gaugeBgRight.width;
 		gaugeHeight = gaugeBg.height;
 
@@ -60,6 +65,36 @@ public class SpeedBar: MonoBehaviour {
 		GUI.EndGroup();
         
 		GUI.EndGroup();
+
+
+
+		/////HEARTS CODE
+
+		if (player.name == "Player1") {      //some hardcoded stuff to position the UI for each player, very dirty! 
+			GUI.BeginGroup (new Rect (16, 48, 256, 32));
+		} else {
+			GUI.BeginGroup (new Rect (16, Screen.height / 2 + 48, 256, 32));
+		}
+		
+
+
+		for (int i = 0; i < 8; i++) {
+			if (i < playerHeartCount) { 
+				GUI.DrawTexture (new Rect (i*32, 0, 32, 32), heartFull);
+			} else {
+				GUI.DrawTexture (new Rect (i*32, 0, 32, 32), heartEmpty);
+			}
+		}
+
+
+		
+		GUI.EndGroup();
+		
+		
+		
+
+
+
 	}
 
 	// Use this for initialization
@@ -68,6 +103,7 @@ public class SpeedBar: MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		playerHeartCount = player.GetComponent<PlayerHeartsGrab> ().heartCount;
 
 		speed = playerControl.speedH;
 		maxSpeed = playerControl.maxSpeedH;
