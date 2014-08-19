@@ -11,7 +11,7 @@ public class StartUpSequence : MonoBehaviour {
 
 	public AudioClip audioClip;
 
-	private float startTimerInterval = .1f;
+	private float startTimerInterval = 1.0f;
 
 	// Use this for initialization
 	void Start () {
