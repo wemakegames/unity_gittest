@@ -7,8 +7,7 @@ public class level_generator : MonoBehaviour {
 
 	public GameObject tiles_0;
 	public Sprite[] tiles;
-	public int level_step = 0;
-	int[][]map_data;
+	int[][] map_data;
 
 	// Use this for initialization
 	void Start () {
@@ -18,39 +17,30 @@ public class level_generator : MonoBehaviour {
 		the_levels.Start ();
 		map_data = the_levels.map_data_array;
 		GenerateLevel (0);
-
-
-		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown ("space")) {
-			level_step++;
-			//GenerateLevel(level_step);
-			print(level_step);
-		}
-		
+				
 	}
 	
 	void GenerateLevel(int the_step){
 		int x, y, z;
 
-		for (z = 0; z < chunks; z++) 
+		for (z = 0; z < chunks; z++)   				//chunks generation (12, hardcoded at the top of the class)
 		
 		{			
 			the_step = z;
 
-			for (y = 0; y < 12; y++) {
-				for (x = 0; x < 96; x++) {
-					tiles_0.GetComponent<BoxCollider2D> ().enabled = true;
+			for (y = 0; y < 12; y++) {   			// rows generation (12)
+				for (x = 0; x < 96; x++) {			// columns generation (96)
+
 
 					switch (map_data [z] [y * 96 + x]) {
 						case 1:			//dark blue block
 							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [0];
 							break;
-						case 2:			//white block
-							
+						case 2:			//white block							
 							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [1];
 							break;
 						case 3:			//red block
@@ -74,6 +64,15 @@ public class level_generator : MonoBehaviour {
 						case 8:			//pink
 							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [7];
 							break;
+						case 9:			//spike up
+							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [8];
+						break;
+						case 10:		//spike down
+							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [9];
+							break;
+						case 11:		//spike left
+							tiles_0.GetComponent<SpriteRenderer> ().sprite = tiles [10];
+							break;
 					}
 
 					if (map_data [z] [y * 96 + x] != 0){    //create the block
@@ -84,7 +83,11 @@ public class level_generator : MonoBehaviour {
 							tiles_0.layer = LayerMask.NameToLayer("Ground");
 						}
 
-						Instantiate (tiles_0, new Vector3 ((1f * x) + 96f * the_step, (1f * -y) + 11f, 0), Quaternion.identity);									
+						tiles_0.GetComponent<BoxCollider2D> ().enabled = true;
+						GameObject temp = Instantiate (tiles_0, new Vector3 ((1f * x) + 96f * the_step, (1f * -y) + 11f, 0), Quaternion.identity) as GameObject;
+						temp.transform.parent = transform;	//adds the level inside the GameManager object
+
+
 					}
 				}
 			}

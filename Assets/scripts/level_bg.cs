@@ -24,7 +24,8 @@ public class level_bg : MonoBehaviour {
 	void GenerateParallax () {
 		for (var i = -12; i< (12 * (level_generator.chunks+1)); i++) { //-12 and (level_generator.chunks+1) are there to create some buffer at the beginning and the end
 			var j = 8 * i;
-			Instantiate(hills, new Vector3(j,3,2), Quaternion.identity);
+			GameObject temp = Instantiate(hills, new Vector3(j,3,2), Quaternion.identity) as GameObject;
+			temp.transform.parent = transform;	//adds the level inside the GameManager object
 		}
 	}
 
@@ -32,7 +33,9 @@ public class level_bg : MonoBehaviour {
 
 		for (var i = -1; i< (12 * (level_generator.chunks / 3)); i++) {
 			var j = 32 * i;
-			Instantiate(stars, new Vector3(j,6,2), Quaternion.identity);
+			GameObject temp = Instantiate(stars, new Vector3(j,6,2), Quaternion.identity) as GameObject;
+			temp.transform.parent = transform;
+			temp.transform.parent = transform;	//adds the level inside the GameManager object
 		}
 	}
 }
