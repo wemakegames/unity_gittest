@@ -92,6 +92,8 @@ public class level_generator : MonoBehaviour {
 				}
 			}
 		}
+
+		GameObject.Destroy (tiles_0); // cleans original tile object
 	}
 }
 
