@@ -46,9 +46,14 @@ public class GameManager : MonoBehaviour {
 		checkCheat = false;
 
 		if ((players [0].transform.position.x - players [1].transform.position.x) > 50) {
-			players[1].GetComponent<PlayerControl>().speedH += players[1].GetComponent<PlayerControl>().maxSpeedH;
+			if (players [1].GetComponent<PlayerControl>().speedH > 0) {
+				players[1].GetComponent<PlayerControl>().speedH += players[1].GetComponent<PlayerControl>().maxSpeedH;
+			}
 		} else if ((players [1].transform.position.x - players [0].transform.position.x) > 50 ) {
-			players[0].GetComponent<PlayerControl>().speedH += players[0].GetComponent<PlayerControl>().maxSpeedH;
+			if (players [0].GetComponent<PlayerControl>().speedH > 0) {
+				players[0].GetComponent<PlayerControl>().speedH += players[0].GetComponent<PlayerControl>().maxSpeedH;
+
+			}
 		}
 
 		yield return StartCoroutine(Wait (5.0f));

@@ -11445,7 +11445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   font: {fileID: 12800000, guid: dd11a3ba6aacc1740b734fc2d01b9e82, type: 3}
-  audioClip: {fileID: 8300000, guid: b1cc03776d57cd040a58bed61a423b97, type: 3}
+  audioClip: {fileID: 8300000, guid: 2578866a54f80884b826494d1f594fcd, type: 3}
 --- !u!114 &2027642377
 MonoBehaviour:
   m_ObjectHideFlags: 0

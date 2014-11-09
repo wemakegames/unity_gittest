@@ -55,7 +55,7 @@ public class StartUpSequence : MonoBehaviour {
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval));
 
 		startTimer = "Mash W and X !";
-		startTimer2 = "Mash Left and Right !";
+		startTimer2 = "Mash L and M !";
 		AudioSource.PlayClipAtPoint (audioClip, transform.position);
 		//activate players
 		foreach ( GameObject player in gameManager.players) {
@@ -68,25 +68,25 @@ public class StartUpSequence : MonoBehaviour {
 		startTimer2 = "";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "Mash W and X !";
-		startTimer2 = "Mash Left and Right !";
+		startTimer2 = "Mash L and M !";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "";
 		startTimer2 = "";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "Mash W and X !";
-		startTimer2 = "Mash Left and Right !";
+		startTimer2 = "Mash L and M !";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "";
 		startTimer2 = "";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "Mash W and X !";
-		startTimer2 = "Mash Left and Right !";
+		startTimer2 = "Mash L and M !";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "";
 		startTimer2 = "";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 		startTimer = "Mash W and X !";
-		startTimer2 = "Mash Left and Right !";
+		startTimer2 = "Mash L and M !";
 		yield return StartCoroutine(gameManager.Wait (startTimerInterval/2));
 
 		//deactivate component so that the loop is not performend anymore
